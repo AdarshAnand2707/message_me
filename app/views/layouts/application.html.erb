@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Message Me" %></title>
+    <%= favicon_link_tag %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -18,11 +19,18 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %> 
+    <%= javascript_include_tag "turbo", type: "module" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "layouts/navigation" %>
+    <div class="container-md">
+      <%= yield %>
+    </div>
   </body>
 </html>
